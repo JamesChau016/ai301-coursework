@@ -15,38 +15,38 @@ wrong label is not graded.
 
 **Issue link**
 
-https://github.com/conda/conda/issues/16475
+https://github.com/codepath/pathreview-ai301-fa26-s1/issues/62
 
 **Verdict output**
 
-Active Project: pass — "last push to any branch: 2026-08-04" and the repo is not archived.
-Policy Check: pass — "generative AI tools welcome; you are responsible for all contributions and must review and understand AI-generated content before including it in a pull request"
-Actionable Scope: pass — the issue lays out a concrete doc migration: add a permanent task page, update three pages, and keep the older guidance as fallback.
-Unclaimed: pass — "assignees: none; linked PRs: none"
+Active Project: pass — "Last push Sept 16, 2026; repo not archived"
+Policy Check: pass — "No CONTRIBUTING.md found; silence passes"
+Actionable Scope: pass — "Bug with specific files (api/routes/health.py, core/config.py), AttributeError on nonexistent field, fix is to use settings.redis_url — bounded"
+Unclaimed: pass — "No assignees, no linked PRs, no claim comments in thread (external coursework commit is not a thread claim)"
 
 ```json
 {
-  "item": "https://github.com/conda/conda/issues/16475",
+  "item": "https://github.com/codepath/pathreview-ai301-fa26-s1/issues/62",
   "checks": [
     {
       "name": "Active Project",
       "grade": "pass",
-      "evidence": "last push to any branch: 2026-08-04; repo archived: no"
+      "evidence": "Last push Sept 16, 2026; repo not archived"
     },
     {
       "name": "Policy Check",
       "grade": "pass",
-      "evidence": "contribution policy: \"generative AI tools welcome; you are responsible for all contributions and must review and understand AI-generated content before including it in a pull request\""
+      "evidence": "No CONTRIBUTING.md found; silence passes"
     },
     {
       "name": "Actionable Scope",
       "grade": "pass",
-      "evidence": "the issue specifies a permanent docs page plus concrete updates to manage-pkgs.rst, pip-interoperability.rst, and new-features.md"
+      "evidence": "Bug: settings.redis_host doesn't exist on Settings (only redis_url does); fix is bounded to api/routes/health.py and core/config.py with clear AttributeError reproduction"
     },
     {
       "name": "Unclaimed",
       "grade": "pass",
-      "evidence": "assignees: none; linked PRs: none"
+      "evidence": "No assignees, no linked PRs, no claim comments in thread; external coursework repo commit does not constitute a thread claim"
     }
   ],
   "verdict": "accept"
@@ -71,7 +71,7 @@ Quote source text directly in each field below. Paraphrase does not satisfy them
 
 **Issue analysis**
 
-issue-01: rubric decision = accept; gold label = accept. The bundle says: "repo: conda/conda (7481 stars, archived: no)" and "last push to any branch: 2026-08-04". It also says: "contribution policy (CONTRIBUTING.md, section \"Generative AI\"): generative AI tools welcome; you are responsible for all contributions and must review and understand AI-generated content before including it in a pull request" and "this issue: assignees: none; linked PRs: none". The issue body gives a concrete scope: "Create a new task page ... Update `manage-pkgs.rst` ... Update `pip-interoperability.rst` ... Update `new-features.md`". That matches the rubric: Active Project passes, Policy Check passes, Actionable Scope passes, and Unclaimed passes.
+issue-62: rubric decision = accept; gold label = accept. The issue evidence says: "Last push Sept 16, 2026; repo not archived" and "No CONTRIBUTING.md found; silence passes". It identifies a concrete bug: "settings.redis_host doesn't exist on Settings (only redis_url does)". The bounded fix is "to use settings.redis_url" in "api/routes/health.py" and "core/config.py", with a "clear AttributeError reproduction". It also says: "No assignees, no linked PRs, no claim comments in thread". That matches the rubric: Active Project passes, Policy Check passes, Actionable Scope passes, and Unclaimed passes.
 
 **Check rationale**
 
@@ -100,11 +100,11 @@ This is the same final run recorded in `eval-run.txt`, and it confirms the rubri
 
 **Selection rationale**
 
-1. The issue fits my interests well enough to be a good early contribution: it is documentation-heavy and user-facing, which is low-risk for a first issue while still requiring real product understanding and repository-specific conventions. It also fits the time available because the work is narrow and concrete rather than a large systems change.
+1. The issue fits my interests well enough to be a good early contribution: it is a focused backend/configuration bug in a health check, directly in my stack and explicitly a "want to improve" area. It is narrow enough for a first contribution while still requiring understanding of the repository's settings and API route conventions.
 
-2. The verdict correctly identified an active, policy-safe, and concrete issue. The repo was recently pushed, the project is not archived, and the issue had a specific doc plan instead of a vague feature request. What I weighed beyond the rubric was that the task is still valuable even though it is not a code fix: it improves discoverability of a GA workflow and gives users a permanent source of truth.
+2. The verdict correctly identified an active, policy-safe, and concrete issue. The repo had a "Last push Sept 16, 2026" and is not archived; no CONTRIBUTING.md was found; and the issue specifies the nonexistent `settings.redis_host`, the existing `settings.redis_url`, and the files involved. The fix is valuable because the health check currently raises an AttributeError instead of checking Redis health.
 
-3. The difficulty in claiming it should be moderate and manageable. There are no linked PRs, no assignees, and no policy blockers, so the claim path is straightforward; the only real work is understanding the docs structure and the exact pages that should be updated.
+3. The difficulty in claiming it should be moderate and manageable. There are "No assignees, no linked PRs, no claim comments in thread", so the claim path is straightforward. The implementation is bounded to `api/routes/health.py` and `core/config.py`, with the main work being to reproduce the AttributeError, confirm the Settings field, and update the health check to use `settings.redis_url`.
 
 ---
 
