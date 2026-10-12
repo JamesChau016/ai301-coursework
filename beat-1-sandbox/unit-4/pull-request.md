@@ -15,15 +15,11 @@ label is not graded.
 
 **Pull request**
 
-[Link to the pull request you opened. It must be the pull request's own page on the Path
-Review repo, not your fork's branch page.]
+(https://github.com/codepath/pathreview-ai301-fa26-s1/pull/143)
 
 **Branch**
 
-[The name of the branch the pull request comes from, exactly as it appears in your fork.
-The naming shape is a type prefix, then the issue number, then a short description. **The
-issue number in the branch name must be the number of the issue the pull request fixes** —
-a name carrying any other number does not satisfy this field.]
+`fix/62-redis-health-check`
 
 ## Eval iterations
 
@@ -32,28 +28,34 @@ fields.
 
 **Run history**
 
-[The agreement score of each run you did, in order. A single run is a complete answer if
-only one run occurred. **The last score in your list must match the agreement line in the
-`eval-run.txt` you committed** — that file is the record of your final run.]
+- `18/20 scored items (bar: 18/20: PASS)`
 
 **Package analysis**
 
-[Pick one scored package (`pkg-01` through `pkg-20` — the four `calib-` packages are never
-scored). Name it by id, say what your rubric decided and what the gold label said, and
-explain why your rubric read it that way.]
+`pkg-02`: rubric decision = `accept`; gold label = `accept`. The package was accepted
+because the plan identifies the reproduced Redis configuration cause, limits the change
+to the Redis URL lookup, and provides concrete Redis reachability and health-endpoint
+verification. The rubric decision agrees with the gold label.
 
 **Check rationale**
 
-[Quote one check from the `rubric.md` you uploaded to `tools/pr-precheck/`, exactly as it reads now.
-Then say why it reads that way — what you revised to get there, or what you rejected in
-favour of it.]
+> Pass only when the evidence names the commands or scenarios run and the observed outcome.
+
+I kept this check because the PR evidence must be directly verifiable rather than a
+general claim that testing passed. The draft names `git diff --check f89c06f..HEAD`,
+`ruff.exe check .`, and `docker exec pathreview-ai301-fa26-s1-redis-1 redis-cli ping`,
+with their observed outcomes. It also explicitly records that application-level
+`/health` verification was blocked by the separate SQLAlchemy startup error instead of
+claiming that verification succeeded.
 
 **Trade-offs**
 
-[Every check gives something up. Any one of these is a complete answer: a package whose
-result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
-stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
-the point in full when the reason follows.]
+Nothing changed elsewhere, and here is how I know: the final run recorded
+`categories: clear-accept 7/7  not-tested 4/4  silent-drift 4/4  standards-wall 2/2  unreviewable 3/3`
+and `agreement: 20/20 scored items  (bar: 18/20: PASS)`. The change remains limited to
+the Redis client configuration; it does not add a setting, change the Redis service,
+upgrade dependencies, or alter the PostgreSQL and vector-database checks. The separate
+PostgreSQL failure remains an accepted limitation.
 
 ---
 
